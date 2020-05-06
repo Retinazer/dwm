@@ -19,13 +19,13 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Hack:size=11" };
 static const char dmenufont[]       = "Hack:size=11";
 
-static const char norm_fg[] = "#c5c8c6";
-static const char norm_bg[] = "#1d1f21";
-static const char norm_border[] = "#707880";
+static const char norm_fg[] = "#d0d0d0";
+static const char norm_bg[] = "#121212";
+static const char norm_border[] = "#262626";
 
-static const char sel_fg[] = "#c5c8c6";
-static const char sel_bg[] = "#373b41";
-static const char sel_border[] = "#707880";
+static const char sel_fg[] = "#d0d0d0";
+static const char sel_bg[] = "#262626";
+static const char sel_border[] = "#262626";
 
 static const char *colors[][3]      = {
     /*               fg           bg         border                         */
@@ -48,7 +48,7 @@ static const Rule rules[] = {
 	{ "Virt-manager", NULL,   NULL,       0,            1,           -1 },
 	{ "Steam",    NULL,       NULL,       0,            0,           -1 },
 	{ "dolphin-emu", NULL,    NULL,       0,            1,           -1 },
-	{ "Galculator", NULL,    NULL,       0,            1,           -1 },
+	{ "Galculator", NULL,    NULL,        0,            1,           -1 },
 };
 
 /* layout(s) */
@@ -118,14 +118,15 @@ static Key keys[] = {
 	{ 0,                            XF86XK_AudioNext,        spawn, SHCMD("cmus-remote -n") },
 	{ 0,                            XF86XK_MonBrightnessUp,  spawn, SHCMD("xbacklight -inc 10") },
 	{ 0,                            XF86XK_MonBrightnessDown,spawn, SHCMD("xbacklight -dec 10") },
-	{ MODKEY|ShiftMask,             XK_w,      spawn,          SHCMD("firefox")},
-	{ MODKEY|ShiftMask,             XK_f,      spawn,          SHCMD("st lf")},
-	{ MODKEY|ShiftMask,             XK_m,      spawn,          SHCMD("st cmus")},
-	{ MODKEY|ShiftMask,             XK_c,      spawn,          SHCMD("st calcurse")},
-	{ MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("st ncpamixer")},
-	{ MODKEY|ShiftMask,             XK_t,      spawn,          SHCMD("st transmission-remote-cli")},
-	{ MODKEY|ShiftMask,             XK_n,      spawn,          SHCMD("connman-gtk")},
+	{ MODKEY|ShiftMask,             XK_w,      spawn,          SHCMD("$BROWSER")},
+	{ MODKEY|ShiftMask,             XK_f,      spawn,          SHCMD("$TERMINAL lf")},
+	{ MODKEY|ShiftMask,             XK_m,      spawn,          SHCMD("$TERMINAL cmus")},
+	{ MODKEY|ShiftMask,             XK_c,      spawn,          SHCMD("$TERMINAL calcurse")},
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("$TERMINAL ncpamixer")},
+	{ MODKEY|ShiftMask,             XK_t,      spawn,          SHCMD("$TERMINAL transmission-remote-cli")},
+	{ MODKEY|ShiftMask,             XK_n,      spawn,          SHCMD("$HOME/.scripts/connman_dmenu")},
 	{ MODKEY,                       XK_Print,  spawn,          SHCMD("scrot $HOME/Pictures/Screenshots/screenshot-%Y-%m-%d-%H_%M.jpg -q 90 && notify-send 'Screenshot saved to:' '~/Pictures/Screenshots'")},
+	{ MODKEY,                       XK_F7,  spawn,          SHCMD("scrot $HOME/Pictures/Screenshots/screenshot-%Y-%m-%d-%H_%M.jpg -q 90 && notify-send 'Screenshot saved to:' '~/Pictures/Screenshots'")},
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
