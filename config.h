@@ -125,8 +125,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("$TERMINAL ncpamixer")},
 	{ MODKEY|ShiftMask,             XK_t,      spawn,          SHCMD("$TERMINAL transmission-remote-cli")},
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          SHCMD("$HOME/.scripts/connman_dmenu")},
-	{ MODKEY,                       XK_Print,  spawn,          SHCMD("scrot $HOME/Pictures/Screenshots/screenshot-%Y-%m-%d-%H_%M.jpg -q 90 && notify-send 'Screenshot saved to:' '~/Pictures/Screenshots'")},
-	{ MODKEY,                       XK_F7,  spawn,          SHCMD("scrot $HOME/Pictures/Screenshots/screenshot-%Y-%m-%d-%H_%M.jpg -q 90 && notify-send 'Screenshot saved to:' '~/Pictures/Screenshots'")},
+	{ MODKEY,                       XK_F7,  spawn,          SHCMD("scrot $HOME/screenshot-%Y-%m-%d-%H_%M.jpg -q 90 && notify-send 'Screenshot saved to:' '~/'")},
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
