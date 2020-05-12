@@ -8,7 +8,7 @@
 
 /* appearance */
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
-static const unsigned int gappx     = 30;       /* gaps between windows */
+static const unsigned int gappx     = 20;       /* gaps between windows */
 static const unsigned int snap      = 5;        /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 10;  /* systray spacing */
@@ -86,8 +86,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_Insert, incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_Delete, incnmaster,     {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_i,      incnmaster,     {.i = +1 } },
+	{ MODKEY|ControlMask,           XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
@@ -107,7 +107,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_z,      quit,           {0} },
 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -5 } },
 	{ MODKEY,                       XK_equal,  setgaps,        {.i = +5 } },
-	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0 }  },
+	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 20 } },
 	{ 0,                            XF86XK_AudioRaiseVolume, spawn, SHCMD("pactl set-sink-volume 0 +5% && killall sleep") },
 	{ 0,                            XF86XK_AudioLowerVolume, spawn, SHCMD("pactl set-sink-volume 0 -5% && killall sleep") },
 	{ 0,                            XF86XK_AudioMute,        spawn, SHCMD("pactl set-sink-mute 0 toggle") },
