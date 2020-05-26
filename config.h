@@ -19,18 +19,22 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Hack:size=11" };
 static const char dmenufont[]       = "Hack:size=11";
 
-static const char norm_fg[] = "#d0d0d0";
-static const char norm_bg[] = "#121212";
+static const char norm_fg[]     = "#d0d0d0";
+static const char norm_bg[]     = "#121212";
 static const char norm_border[] = "#262626";
-
-static const char sel_fg[] = "#d0d0d0";
-static const char sel_bg[] = "#262626";
-static const char sel_border[] = "#262626";
+static const char sel_fg[]      = "#121212";
+static const char sel_bg[]      = "#b7cbf4";
+static const char sel_border[]  = "#262626";
 
 static const char *colors[][3]      = {
-    /*               fg           bg         border                         */
-    [SchemeNorm] = { norm_fg,     norm_bg,   norm_border }, // unfocused wins
-    [SchemeSel]  = { sel_fg,      sel_bg,    sel_border },  // the focused win
+    /*                   fg           bg         border                         */
+    [SchemeNorm]     = { norm_fg,     norm_bg,   norm_border }, // unfocused wins
+    [SchemeSel]      = { sel_fg,      sel_bg,    sel_border  }, // the focused win
+    [SchemeStatus]   = { norm_fg,     norm_bg,   "#000000"   }, // Statusbar right {text,background,not used but cannot be empty}
+    [SchemeTagsSel]  = { sel_fg,      sel_bg,    "#000000"   }, // Tagbar left selected {text,background,not used but cannot be empty}
+    [SchemeTagsNorm] = { norm_fg,     norm_bg,   "#000000"   }, // Tagbar left unselected {text,background,not used but cannot be empty}
+    [SchemeInfoSel]  = { norm_fg,     norm_bg,   "#000000"   }, // infobar middle  selected {text,background,not used but cannot be empty}
+    [SchemeInfoNorm] = { norm_fg,     norm_bg,   "#000000"   }, // infobar middle  unselected {text,background,not used but cannot be empty}
 };
 
 /* tagging */
@@ -108,16 +112,16 @@ static Key keys[] = {
 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -5 } },
 	{ MODKEY,                       XK_equal,  setgaps,        {.i = +5 } },
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 20 } },
-	{ 0,                            XF86XK_AudioRaiseVolume, spawn, SHCMD("pactl set-sink-volume 0 +5% && killall sleep") },
-	{ 0,                            XF86XK_AudioLowerVolume, spawn, SHCMD("pactl set-sink-volume 0 -5% && killall sleep") },
-	{ 0,                            XF86XK_AudioMute,        spawn, SHCMD("pactl set-sink-mute 0 toggle") },
-	{ 0,                            XF86XK_AudioMicMute,     spawn, SHCMD("amixer set Capture toggle") },
-	{ 0,                            XF86XK_AudioPlay,        spawn, SHCMD("cmus-remote -u") },
-	{ 0,                            XF86XK_AudioPrev,        spawn, SHCMD("cmus-remote -r") },
-	{ 0,                            XF86XK_AudioStop,        spawn, SHCMD("cmus-remote -s") },
-	{ 0,                            XF86XK_AudioNext,        spawn, SHCMD("cmus-remote -n") },
-	{ 0,                            XF86XK_MonBrightnessUp,  spawn, SHCMD("xbacklight -inc 10") },
-	{ 0,                            XF86XK_MonBrightnessDown,spawn, SHCMD("xbacklight -dec 10") },
+	{ 0,XF86XK_AudioRaiseVolume,               spawn,          SHCMD("pactl set-sink-volume 0 +5% && killall sleep") },
+	{ 0,XF86XK_AudioLowerVolume,               spawn,          SHCMD("pactl set-sink-volume 0 -5% && killall sleep") },
+	{ 0,XF86XK_AudioMute,                      spawn,          SHCMD("pactl set-sink-mute 0 toggle") },
+	{ 0,XF86XK_AudioMicMute,                   spawn,          SHCMD("amixer set Capture toggle") },
+	{ 0,XF86XK_AudioPlay,                      spawn,          SHCMD("cmus-remote -u") },
+	{ 0,XF86XK_AudioPrev,                      spawn,          SHCMD("cmus-remote -r") },
+	{ 0,XF86XK_AudioStop,                      spawn,          SHCMD("cmus-remote -s") },
+	{ 0,XF86XK_AudioNext,                      spawn,          SHCMD("cmus-remote -n") },
+	{ 0,XF86XK_MonBrightnessUp,                spawn,          SHCMD("xbacklight -inc 10") },
+	{ 0,XF86XK_MonBrightnessDown,              spawn,          SHCMD("xbacklight -dec 10") },
 	{ MODKEY|ShiftMask,             XK_w,      spawn,          SHCMD("$BROWSER")},
 	{ MODKEY|ShiftMask,             XK_f,      spawn,          SHCMD("$TERMINAL lf")},
 	{ MODKEY|ShiftMask,             XK_m,      spawn,          SHCMD("$TERMINAL cmus")},
