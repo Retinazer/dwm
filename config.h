@@ -22,8 +22,8 @@ static const char dmenufont[]       = "Hack:size=11";
 static const char norm_fg[]     = "#d0d0d0";
 static const char norm_bg[]     = "#121212";
 static const char norm_border[] = "#262626";
-static const char sel_fg[]      = "#121212";
-static const char sel_bg[]      = "#b7cbf4";
+static const char sel_fg[]      = "#d0d0d0";
+static const char sel_bg[]      = "#b93f68";
 static const char sel_border[]  = "#262626";
 
 static const char *colors[][3]      = {
@@ -80,7 +80,8 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", norm_bg, "-nf", norm_fg, "-sb", sel_bg, "-sf", sel_fg, NULL };
+/* static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", norm_bg, "-nf", norm_fg, "-sb", sel_bg, "-sf", sel_fg, "-l", "30", "-c", "-bw", "5", "-h", "22", NULL }; */
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-l", "30", "-c", "-bw", "5", "-h", "22", NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 static Key keys[] = {
