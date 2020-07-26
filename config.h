@@ -17,14 +17,14 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 0;        /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Hack:size=11" };
-static const char dmenufont[]       = "Hack:size=11";
+static const char *fonts[]          = { "Roboto Condensed:style=Regular:size=10", "Siji:style=Regular:size=14", }; 
+static const char dmenufont[]       = "Roboto Condensed:style=Regular:size=10";
 
 static const char norm_fg[]     = "#d0d0d0";
-static const char norm_bg[]     = "#121212";
+static const char norm_bg[]     = "#1A2026";
 static const char norm_border[] = "#262626";
 static const char sel_fg[]      = "#d0d0d0";
-static const char sel_bg[]      = "#b93f68";
+static const char sel_bg[]      = "#2d3741";
 static const char sel_border[]  = "#262626";
 
 static const char *colors[][3]      = {
@@ -62,9 +62,9 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ " ",      tile },    /* first entry is default */
-	{ " ",      NULL },    /* no layout function means floating behavior */
-	{ " ",      monocle },
+	{ "\ue002",      tile },    /* first entry is default */
+	{ "\ue006",      NULL },    /* no layout function means floating behavior */
+	{ "\ue004",   monocle },
 };
 
 /* key definitions */
@@ -81,7 +81,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 /* static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", norm_bg, "-nf", norm_fg, "-sb", sel_bg, "-sf", sel_fg, "-l", "30", "-c", "-bw", "5", "-h", "22", NULL }; */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-l", "30", "-c", "-bw", "5", "-h", "22", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-l", "20", "-c", "-bw", "5", "-h", "22", NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 static Key keys[] = {
@@ -131,6 +131,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_t,      spawn,          SHCMD("$TERMINAL transmission-remote-cli")},
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          SHCMD("$HOME/.scripts/connman_dmenu")},
 	{ MODKEY,                       XK_F7,     spawn,          SHCMD("scrot $HOME/screenshot-%Y-%m-%d-%H_%M.jpg -q 90 && notify-send 'Screenshot saved to:' '~/'")},
+	{ MODKEY,                       XK_F12,    spawn,          SHCMD("thinkpad-dock")},
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
