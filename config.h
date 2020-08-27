@@ -17,8 +17,8 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 0;        /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Siji:style=Regular:size=14", "Inter:style=bold:size=9", };
-static const char dmenufont[]       = "Inter:style=bold:size=10";
+static const char *fonts[]          = { "Siji:style=Regular:size=12", "Montserrat:style=Regular:size=9", };
+static const char dmenufont[]       = "Montserrat:style=Regular:size=10";
 
 static const char norm_fg[]     = "#d0d0d0";
 static const char norm_bg[]     = "#1A2026";
@@ -124,17 +124,17 @@ static Key keys[] = {
 	{ 0,XF86XK_MonBrightnessUp,                spawn,          SHCMD("xbacklight -inc 10") },
 	{ 0,XF86XK_MonBrightnessDown,              spawn,          SHCMD("xbacklight -dec 10") },
 	{ MODKEY|ShiftMask,             XK_w,      spawn,          SHCMD("$BROWSER")},
-	{ MODKEY|ShiftMask,             XK_f,      spawn,          SHCMD("$TERMINAL lf")},
+	{ MODKEY|ShiftMask,             XK_f,      spawn,          SHCMD("$TERMINAL nnn")},
 	{ MODKEY|ShiftMask,             XK_m,      spawn,          SHCMD("$TERMINAL cmus")},
 	{ MODKEY|ShiftMask,             XK_c,      spawn,          SHCMD("$TERMINAL calcurse")},
 	{ MODKEY|ShiftMask,             XK_a,      spawn,          SHCMD("$TERMINAL pulsemixer")},
 	{ MODKEY|ShiftMask,             XK_t,      spawn,          SHCMD("$TERMINAL rtorrent")},
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          SHCMD("$TERMINAL connmanctl")},
-	{ MODKEY|ShiftMask,             XK_g,      spawn,          SHCMD("element-desktop")},
-	{ MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("passmenu")},
+	{ MODKEY|ShiftMask,             XK_v,      spawn,          SHCMD("$TERMINAL nvim -c VimwikiIndex")},
+	{ MODKEY|ShiftMask,             XK_l,      spawn,          SHCMD("slock")},
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("$HOME/.local/bin/passmenu")},
 	{ MODKEY|ShiftMask,             XK_b,      spawn,          SHCMD("$TERMINAL newsboat")},
 	{ MODKEY,                       XK_F7,     spawn,          SHCMD("scrot $HOME/screenshot-%Y-%m-%d-%H_%M.jpg -q 90 && notify-send 'Screenshot saved to:' '~/'")},
-	{ MODKEY,                       XK_F3,     spawn,          SHCMD("thinkpad-dock")},
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
