@@ -133,8 +133,9 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          SHCMD("$TERMINAL connmanctl")},
 	{ MODKEY|ShiftMask,             XK_v,      spawn,          SHCMD("$TERMINAL nvim -c VimwikiIndex")},
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          SHCMD("slock")},
-	{ MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("$HOME/.local/bin/passmenu")},
 	{ MODKEY|ShiftMask,             XK_b,      spawn,          SHCMD("$TERMINAL newsboat")},
+	{ MODKEY|ShiftMask,             XK_i,      spawn,          SHCMD("$TERMINAL irssi")},
+	{ MODKEY,                       XK_p,      spawn,          SHCMD("$HOME/.local/bin/passmenu")},
 	{ MODKEY,                       XK_F7,     spawn,          SHCMD("scrot $HOME/screenshot-%Y-%m-%d-%H_%M.jpg -q 90 && notify-send 'Screenshot saved to:' '~/'")},
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
