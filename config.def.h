@@ -17,8 +17,8 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 0;        /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Siji:style=Regular:size=12", "Montserrat:style=Regular:size=9", };
-static const char dmenufont[]       = "Montserrat:style=Regular:size=10";
+static const char *fonts[]          = { "Siji:style=Regular:size=12", "Montserrat:style=Regular:size=10", };
+static const char dmenufont[]       = "Montserrat:style=Regular:size=9";
 
 static const char norm_fg[]     = "#d0d0d0";
 static const char norm_bg[]     = "#1A2026";
@@ -49,8 +49,6 @@ static const Rule rules[] = {
 	/* class                  instance    title                  tags mask  isfloating  isterminal  noswallow  monitor */
 	{ "Firefox",              NULL,       NULL,                  0,         0,          0,         -1,        -1 },
 	{ "Surf",                 NULL,       NULL,                  0,         0,          0,         -1,        -1 },
-	{ "Virt-manager",         NULL,       NULL,                  0,         0,          0,         -1,        -1 },
-	{ "Galculator",           NULL,       NULL,                  0,         1,          0,         -1,        -1 },
 	{ "st",                   NULL,       NULL,                  0,         0,          1,         -1,        -1 },
 	{ NULL,                   NULL,       "Event Tester",        0,         1,          0,          1,        -1 }, /* xev */
 };
@@ -80,21 +78,21 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-/* static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", norm_bg, "-nf", norm_fg, "-sb", sel_bg, "-sf", sel_fg, "-l", "30", "-c", "-bw", "5", "-h", "22", NULL }; */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-l", "20", "-c", "-bw", "5", "-h", "22", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-p", "run:", "-m", dmenumon, "-fn", dmenufont, "-l", "20", "-c", "-bw", "5", "-h", "22", NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_g,      spawn,          SHCMD("optirun $(dmenu_path | dmenu -p \"optirun:\" -l 20 -c -bw 5 -h 22 \"$@\")")},
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_equal,  incnmaster,     {.i = +1 } },
 	{ MODKEY|ControlMask,           XK_minus,  incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_comma,  setmfact,       {.f = -0.05} },
+	{ MODKEY,                       XK_period, setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
@@ -105,10 +103,10 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_h,      focusmon,       {.i = -1 } },
+	{ MODKEY,                       XK_l,      focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_h,      tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_l,      tagmon,         {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_z,      quit,           {0} },
 	{ MODKEY|ControlMask|ShiftMask, XK_z,      quit,           {1} },
 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -5 } },
@@ -119,15 +117,16 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_m,      spawn,          SHCMD("$TERMINAL cmus")},
 	{ MODKEY|ShiftMask,             XK_c,      spawn,          SHCMD("$TERMINAL calcurse")},
 	{ MODKEY|ShiftMask,             XK_a,      spawn,          SHCMD("$TERMINAL pulsemixer")},
-	{ MODKEY|ShiftMask,             XK_t,      spawn,          SHCMD("$TERMINAL rtorrent")},
+	{ MODKEY|ShiftMask,             XK_t,      spawn,          SHCMD("$TERMINAL tremc")},
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          SHCMD("$TERMINAL connmanctl")},
 	{ MODKEY|ShiftMask,             XK_v,      spawn,          SHCMD("$TERMINAL nvim -c VimwikiIndex")},
 	{ MODKEY|ShiftMask,             XK_e,      spawn,          SHCMD("$TERMINAL nvim")},
 	{ MODKEY|ShiftMask,             XK_b,      spawn,          SHCMD("$TERMINAL newsboat")},
 	{ MODKEY|ShiftMask,             XK_i,      spawn,          SHCMD("$TERMINAL irssi")},
-	{ MODKEY|ShiftMask,             XK_l,      spawn,          SHCMD("slock")},
+	{ MODKEY|ControlMask|ShiftMask, XK_l,      spawn,          SHCMD("slock")},
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("scrot $HOME/screenshot-%Y-%m-%d-%H_%M.png -q 100 && notify-send 'Screenshot saved to:' '~/'")},
-	{ MODKEY,                       XK_p,      spawn,          SHCMD("$HOME/.local/bin/passmenu")},
+	{ MODKEY,                       XK_p,      spawn,          SHCMD("dmpass")},
+	{ MODKEY|ShiftMask,             XK_d,      spawn,          SHCMD("dmrandr")},
 	{ 0,XF86XK_AudioRaiseVolume,               spawn,          SHCMD("pactl set-sink-volume 0 +5% && killall sleep") },
 	{ 0,XF86XK_AudioLowerVolume,               spawn,          SHCMD("pactl set-sink-volume 0 -5% && killall sleep") },
 	{ 0,XF86XK_AudioMute,                      spawn,          SHCMD("pactl set-sink-mute 0 toggle") },
@@ -136,8 +135,9 @@ static Key keys[] = {
 	{ 0,XF86XK_AudioPrev,                      spawn,          SHCMD("cmus-remote -r") },
 	{ 0,XF86XK_AudioStop,                      spawn,          SHCMD("cmus-remote -s") },
 	{ 0,XF86XK_AudioNext,                      spawn,          SHCMD("cmus-remote -n") },
-	{ 0,XF86XK_MonBrightnessUp,                spawn,          SHCMD("xbacklight -inc 10") },
-	{ 0,XF86XK_MonBrightnessDown,              spawn,          SHCMD("xbacklight -dec 10") },
+	{ 0,XF86XK_MonBrightnessUp,                spawn,          SHCMD("sudo bl inc 10") },
+	{ 0,XF86XK_MonBrightnessDown,              spawn,          SHCMD("sudo bl dec 10") },
+	{ MODKEY,												XK_y,      spawn,          SHCMD("sudo bl dmenu") },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
